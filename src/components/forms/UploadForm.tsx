@@ -7,6 +7,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import ButtonSubmit from "../ui/Button/ButtonSubmit";
 import { useState } from "react";
+import Result from "@/pages/Result";
+import { useNavigate } from "react-router-dom";
 
 type UploadFormData = {
   followers?: File;
@@ -107,8 +109,9 @@ function UploadForm() {
     }
   };
 
+  const navigate = useNavigate();
+
   const onSubmit = async (data: UploadSchema) => {
-    setResult({}); // clear previous
     try {
       if (!data.followers || !data.following) {
         setResult({ error: "Both files are required." });
@@ -143,9 +146,12 @@ function UploadForm() {
         (u) => !normFollowing.includes(u)
       );
 
-      setResult({
-        notFollowingBack,
-        notFollowedBack,
+      // 👉 kirim data ke halaman result
+      navigate("/result", {
+        state: {
+          notFollowingBack,
+          notFollowedBack,
+        },
       });
     } catch (err) {
       console.error(err);
@@ -196,43 +202,6 @@ function UploadForm() {
           <ButtonSubmit name="checking" />
         </div>
       </form>
-
-      {/* Result display */}
-      <div className="mt-6 w-full max-w-xl">
-        {result.error && <p className="text-error">{result.error}</p>}
-
-        {result.notFollowingBack && result.notFollowingBack.length > 0 && (
-          <div className="mt-4">
-            <h3 className="font-bold">
-              You follow but they don't follow back:
-            </h3>
-            <ul className="list-disc ml-6 mt-2">
-              {result.notFollowingBack.map((u) => (
-                <li key={u}>{u}</li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-        {result.notFollowedBack && result.notFollowedBack.length > 0 && (
-          <div className="mt-4">
-            <h3 className="font-bold">
-              They follow you but you don't follow back:
-            </h3>
-            <ul className="list-disc ml-6 mt-2">
-              {result.notFollowedBack.map((u) => (
-                <li key={u}>{u}</li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-        {result.notFollowingBack?.length === 0 &&
-          result.notFollowedBack?.length === 0 &&
-          !result.error && (
-            <p className="mt-4">All mutual — no differences found.</p>
-          )}
-      </div>
     </>
   );
 }
