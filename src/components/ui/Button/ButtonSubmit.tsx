@@ -1,4 +1,7 @@
-const Submit = ({ name }) => {
+interface ButtonSubmitProps {
+  name: string;
+}
+const ButtonSubmit = ({ name }: ButtonSubmitProps) => {
   return (
     <>
       <button className={`btn btn-soft btn-accent w-full capitalize`}>
@@ -8,4 +11,4 @@ const Submit = ({ name }) => {
   );
 };
 
-export default Submit;
+export default ButtonSubmit;

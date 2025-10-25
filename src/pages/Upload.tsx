@@ -1,5 +1,4 @@
-import Submit from "@/components/ui/Button/Submit";
-import FileInput from "@/components/ui/Input/FileInput";
+import UploadForm from "@/components/forms/UploadForm";
 
 const Upload = () => {
   return (
@@ -9,29 +8,7 @@ const Upload = () => {
           <h2 className="text-3xl text-center font-bold py-5">
             Find out who’s not following you back on Instagram
           </h2>
-          <form className="flex flex-col mx-auto gap-y-7 mt-6 w-max">
-            <div className="flex flex-col gap-2">
-              <label
-                htmlFor="followersFile"
-                className="font-semibold text-base"
-              >
-                Upload JSON file (e.g., followers_1.json)
-              </label>
-              <FileInput id="followersFile" />
-            </div>
-            <div className="flex flex-col gap-2">
-              <label
-                htmlFor="followersFile"
-                className="font-semibold text-base"
-              >
-                Upload JSON file (e.g., following.json)
-              </label>
-              <FileInput id="followersFile" />
-            </div>
-            <div className="mt-4">
-              <Submit name="checking" />
-            </div>
-          </form>
+          <UploadForm />
           <p className="text-sm text-center my-7">
             If you don't have the JSON files yet, visit the&nbsp;
             <a href="/tutorial" className="underline font-semibold">
