@@ -1,3 +1,4 @@
+import TableResult from "@/components/ui/TableResult";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const Result = () => {
@@ -7,7 +8,6 @@ const Result = () => {
   const result = location.state as
     | { notFollowingBack: string[]; notFollowedBack: string[] }
     | undefined;
-
   if (!result) {
     // Jika user langsung buka /result tanpa upload
     return (
@@ -28,9 +28,8 @@ const Result = () => {
 
   return (
     <div className="container mx-auto px-4 py-10">
-      <h2 className="text-3xl font-bold text-center mb-6">Your Results</h2>
-
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+        <TableResult />
         <div>
           <h3 className="font-semibold text-lg mb-2">
             You follow but they don’t follow back:

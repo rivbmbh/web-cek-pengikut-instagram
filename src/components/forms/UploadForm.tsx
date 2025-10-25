@@ -7,13 +7,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import ButtonSubmit from "../ui/Button/ButtonSubmit";
 import { useState } from "react";
-import Result from "@/pages/Result";
 import { useNavigate } from "react-router-dom";
-
-type UploadFormData = {
-  followers?: File;
-  following?: File;
-};
+import { toast, ToastContainer } from "react-toastify";
 
 function UploadForm() {
   const [result, setResult] = useState<{
@@ -26,7 +21,6 @@ function UploadForm() {
     register,
     handleSubmit,
     formState: { errors },
-    // watch,
   } = useForm<UploadSchema>({
     resolver: zodResolver(uploadSchema),
   });
@@ -146,7 +140,21 @@ function UploadForm() {
         (u) => !normFollowing.includes(u)
       );
 
-      // 👉 kirim data ke halaman result
+      //cek jika format file json bukan seperti dari instgram maka tampil error message
+      if (followersArr.length === 0 || followingArr.length === 0) {
+        toast.error("The uploaded files don't contain valid Instagram data.", {
+          icon: ({ theme, type }) => <img src="error.webp" />,
+          position: "top-center",
+          theme: "colored",
+        });
+        setResult({
+          error:
+            "No valid data found. Please make sure you upload Instagram export files.",
+        });
+        return;
+      }
+
+      //kirim data ke halaman result
       navigate("/result", {
         state: {
           notFollowingBack,
@@ -154,16 +162,28 @@ function UploadForm() {
         },
       });
     } catch (err) {
-      console.error(err);
+      const errorMessage =
+        err instanceof Error
+          ? err.message
+          : typeof err === "string"
+          ? err
+          : "An unknown error occurred while reading JSON files.";
+
+      toast.error(`Failed to read or parse JSON files. ${errorMessage}`, {
+        icon: () => <img src="error.webp" className="w-10" />,
+        position: "top-center",
+        theme: "colored",
+      });
+
       setResult({
-        error:
-          "Failed to read or parse JSON files. Make sure files are valid JSON.",
+        error: `Failed to read or parse JSON files. ${errorMessage}`,
       });
     }
   };
 
   return (
     <>
+      <ToastContainer />
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col mx-auto gap-y-7 mt-6 w-max"
