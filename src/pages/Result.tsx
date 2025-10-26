@@ -6,8 +6,9 @@ const Result = () => {
   const navigate = useNavigate();
 
   const result = location.state as
-    | { notFollowingBack: string[]; notFollowedBack: string[] }
+    | { notFollowingBack: any; notFollowedBack: any }
     | undefined;
+
   if (!result) {
     // Jika user langsung buka /result tanpa upload
     return (
@@ -29,16 +30,37 @@ const Result = () => {
   return (
     <div className="container mx-auto px-4 py-10">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-        <TableResult />
+        {/* <TableResult /> */}
         <div>
           <h3 className="font-semibold text-lg mb-2">
             You follow but they don’t follow back:
           </h3>
           {result.notFollowingBack.length > 0 ? (
             <ul className="list-disc ml-5">
-              {result.notFollowingBack.map((user) => (
-                <li key={user}>{user}</li>
-              ))}
+              {result.notFollowingBack.length > 0 ? (
+                <ul className="list-disc ml-5 space-y-2">
+                  {result.notFollowingBack.map((data: any) => (
+                    <li key={data.username}>
+                      <a
+                        href={data.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-medium text-blue-500 hover:underline"
+                      >
+                        {data.username}
+                      </a>
+                      <span className="block text-sm text-gray-500">
+                        Followed since:{" "}
+                        {data.time
+                          ? new Date(data.time * 1000).toLocaleString()
+                          : "Unknown"}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p>Everyone you follow follows you back 🎉</p>
+              )}
             </ul>
           ) : (
             <p>Everyone you follow follows you back 🎉</p>
@@ -50,13 +72,28 @@ const Result = () => {
             They follow you but you don’t follow back:
           </h3>
           {result.notFollowedBack.length > 0 ? (
-            <ul className="list-disc ml-5">
-              {result.notFollowedBack.map((user) => (
-                <li key={user}>{user}</li>
+            <ul className="list-disc ml-5 space-y-2">
+              {result.notFollowingBack.map((data: any) => (
+                <li key={data.username}>
+                  <a
+                    href={data.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium text-blue-500 hover:underline"
+                  >
+                    {data.username}
+                  </a>
+                  <span className="block text-sm text-gray-500">
+                    Followed since:{" "}
+                    {data.time
+                      ? new Date(data.time * 1000).toLocaleString()
+                      : "Unknown"}
+                  </span>
+                </li>
               ))}
             </ul>
           ) : (
-            <p>You follow everyone who follows you 🎉</p>
+            <p>Everyone you follow follows you back 🎉</p>
           )}
         </div>
       </div>

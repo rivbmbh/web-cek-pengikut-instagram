@@ -33,7 +33,9 @@ function UploadForm() {
 
   // helper: ekstrak username dari struktur followers (array at root)
   const extractFollowers = (data: any): string[] => {
-    if (!data) return [];
+    if (!data) return []; //jika data tidak ada kembalikan array kosong
+
+    //ubah object>array
     if (Array.isArray(data)) {
       return data
         .flatMap((item: any) => {
@@ -41,9 +43,13 @@ function UploadForm() {
           const sld = item?.string_list_data;
           if (!sld || !Array.isArray(sld)) return [];
           // sometimes value exists, sometimes only href
-          return sld.map(
-            (s: any) => s.value ?? extractUsernameFromHref(s.href)
-          );
+          return sld.map((s: any) => {
+            return {
+              username: s.value ?? extractUsernameFromHref(s.href),
+              link: s.href,
+              time: s.timestamp,
+            };
+          });
         })
         .filter(Boolean);
     }
@@ -51,40 +57,61 @@ function UploadForm() {
     if (Array.isArray(data?.relationships_followers)) {
       return data.relationships_followers.flatMap(
         (item: any) =>
-          item.string_list_data?.map(
-            (s: any) => s.value ?? extractUsernameFromHref(s.href)
-          ) || []
+          item.string_list_data?.map((s: any) => {
+            return {
+              username: s.value ?? extractUsernameFromHref(s.href),
+              link: s.href,
+              time: s.timestamp,
+            };
+          }) || []
       );
     }
     return [];
   };
   // helper: ekstrak username dari struktur following (object.relationships_following)
-  const extractFollowing = (data: any): string[] => {
+  const extractFollowing = (
+    data: any
+  ): { username: string; link?: string; time?: number }[] => {
     if (!data) return [];
+
     if (Array.isArray(data)) {
-      // sometimes following might also be an array (handle gracefully)
       return data
-        .flatMap(
-          (item: any) =>
-            item?.string_list_data?.map(
-              (s: any) => s.value ?? extractUsernameFromHref(s.href)
-            ) || []
-        )
-        .filter(Boolean);
-    }
-    if (Array.isArray(data.relationships_following)) {
-      return data.relationships_following
         .flatMap((item: any) => {
-          // prefer title, fallback to string_list_data value or href
-          if (item?.title) return item.title;
           const sld = item?.string_list_data;
           if (!sld || !Array.isArray(sld)) return [];
-          return sld.map(
-            (s: any) => s.value ?? extractUsernameFromHref(s.href)
-          );
+          return sld.map((s: any) => ({
+            username: s.value ?? extractUsernameFromHref(s.href),
+            link: s.href,
+            time: s.timestamp,
+          }));
         })
         .filter(Boolean);
     }
+
+    if (Array.isArray(data.relationships_following)) {
+      return data.relationships_following
+        .flatMap((item: any) => {
+          if (item?.title) {
+            return [
+              {
+                username: item.title,
+                link: item?.string_list_data?.[0]?.href,
+                time: item?.string_list_data?.[0]?.timestamp,
+              },
+            ];
+          }
+
+          const sld = item?.string_list_data;
+          if (!sld || !Array.isArray(sld)) return [];
+          return sld.map((s: any) => ({
+            username: s.value ?? extractUsernameFromHref(s.href),
+            link: s.href,
+            time: s.timestamp,
+          }));
+        })
+        .filter(Boolean);
+    }
+
     return [];
   };
 
@@ -117,27 +144,26 @@ function UploadForm() {
         readJson(data.following),
       ]);
 
-      const followersArr = extractFollowers(followersJson).map((s) =>
-        String(s)
-      );
-      const followingArr = extractFollowing(followingJson).map((s) =>
-        String(s)
-      );
+      const followersArr = extractFollowers(followersJson);
+      const followingArr = extractFollowing(followingJson);
 
-      // dedupe (just in case) and lowercase-normalize for comparison
       const norm = (arr: string[]) =>
-        Array.from(new Set(arr.map((u) => (u ?? "").toString().trim()))).filter(
-          Boolean
-        );
+        Array.from(
+          new Set(arr.map((u) => (u ?? "").toString().trim().toLowerCase()))
+        ).filter(Boolean);
 
-      const normFollowers = norm(followersArr);
-      const normFollowing = norm(followingArr);
+      const followersUsernames = followersArr.map((u) => u.username);
+      const followingUsernames = followingArr.map((u) => u.username);
 
-      const notFollowingBack = normFollowing.filter(
-        (u) => !normFollowers.includes(u)
+      const normFollowers = norm(followersUsernames);
+      const normFollowing = norm(followingUsernames);
+
+      const notFollowingBack = followingArr.filter(
+        (u) => !normFollowers.includes(u.username.trim().toLowerCase())
       );
-      const notFollowedBack = normFollowers.filter(
-        (u) => !normFollowing.includes(u)
+
+      const notFollowedBack = followersArr.filter(
+        (u) => !normFollowing.includes(u.username.trim().toLowerCase())
       );
 
       //cek jika format file json bukan seperti dari instgram maka tampil error message
@@ -154,7 +180,6 @@ function UploadForm() {
         return;
       }
 
-      //kirim data ke halaman result
       navigate("/result", {
         state: {
           notFollowingBack,

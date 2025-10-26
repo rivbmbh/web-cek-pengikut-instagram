@@ -1,4 +1,4 @@
-const TableResult = ({ name, href, time }) => {
+const TableResult = ({ data: [] }) => {
   return (
     <>
       <div className="overflow-x-auto">
