@@ -1,52 +1,46 @@
-const TableResult = ({ data: [] }) => {
+const TableResult = ({ data, message }: any) => {
   return (
     <>
       <div className="overflow-x-auto">
-        <table className="table">
-          {/* head */}
-          <thead>
-            <tr>
-              <th>
-                <label>
-                  <input type="checkbox" className="checkbox" />
-                </label>
-              </th>
-              <th>Name</th>
-              <th>Url</th>
-              <th>Time</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* row 1 */}
-            <tr>
-              <th>
-                <label>
-                  <input type="checkbox" className="checkbox" />
-                </label>
-              </th>
-              <td>
-                <div className="flex items-center gap-3">
-                  <div className="avatar">
-                    <div className="mask mask-squircle h-12 w-12">
-                      <img
-                        src="https://img.daisyui.com/images/profile/demo/2@94.webp"
-                        alt="Avatar Tailwind CSS Component"
-                      />
+        {data.length > 0 ? (
+          <table className="table">
+            <thead>
+              <tr className="font-bold text-base text-accent">
+                <th>No</th>
+                <th>Name</th>
+                <th>Followed since</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.map((v: any, i: number) => (
+                <tr key={v.username}>
+                  <td>{i + 1}</td>
+                  <td>
+                    <div className="flex items-center gap-3">
+                      <div className="font-semibold hover:underline">
+                        <a href={v.link}>{v.username}</a>
+                      </div>
                     </div>
-                  </div>
-                  <div>{name}</div>
-                </div>
-              </td>
-              <td>
-                <a href={href} className="underline">
-                  {href}
-                </a>
-              </td>
-              <td>{time}</td>
-            </tr>
-          </tbody>
-        </table>
+                  </td>
+                  <td>
+                    <span className="block text-sm text-gray-500">
+                      {v.time
+                        ? new Date(v.time * 1000).toLocaleString()
+                        : "Unknown"}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <div>
+            <div className="flex justify-center w-full">
+              <img src="yeaay.webp" alt="icon-capybara" className="mt-5" />
+            </div>
+            <p className="text-center font-semibold text-lg">{message}</p>
+          </div>
+        )}
       </div>
     </>
   );
