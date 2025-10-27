@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 const Navbar = () => {
   return (
     <>
@@ -49,10 +51,24 @@ const Navbar = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
             <li>
-              <a href="/">Home</a>
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  isActive ? "font-bold text-accent" : ""
+                }
+              >
+                Home
+              </NavLink>
             </li>
             <li>
-              <a href="/tutorial">Tutorial</a>
+              <NavLink
+                to="/tutorial"
+                className={({ isActive }) =>
+                  isActive ? "font-bold text-accent" : ""
+                }
+              >
+                Tutorial
+              </NavLink>
             </li>
             {/* <li>
               <details>
@@ -68,7 +84,25 @@ const Navbar = () => {
               </details>
             </li> */}
             <li>
-              <a href="/upload">Upload</a>
+              <NavLink
+                to="/upload"
+                className={({ isActive }) =>
+                  isActive ? "font-bold text-accent" : ""
+                }
+              >
+                Upload
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink
+                to="/result"
+                className={({ isActive }) =>
+                  isActive ? "font-bold text-accent" : ""
+                }
+              >
+                Result
+              </NavLink>
             </li>
           </ul>
         </div>
