@@ -1,10 +1,13 @@
 interface ButtonSubmitProps {
   name: string;
 }
-const ButtonSubmit = ({ name }: ButtonSubmitProps) => {
+const ButtonSubmit = ({ name, click, loading }: ButtonSubmitProps) => {
   return (
     <>
-      <button className={`btn btn-soft btn-accent w-full capitalize`}>
+      <button
+        onClick={click}
+        className={`btn btn-soft btn-accent w-full capitalize`}
+      >
         {name}
       </button>
     </>

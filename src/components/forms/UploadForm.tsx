@@ -5,7 +5,6 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 // import { useState } from "react";
 import { useForm } from "react-hook-form";
-import ButtonSubmit from "../ui/Button/ButtonSubmit";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
@@ -16,6 +15,7 @@ function UploadForm() {
     notFollowedBack?: string[]; // they follow you, you don't follow back
     error?: string;
   }>({});
+  const [loading, setLoading] = useState<boolean>(false);
 
   const {
     register,
@@ -134,6 +134,7 @@ function UploadForm() {
 
   const onSubmit = async (data: UploadSchema) => {
     try {
+      setLoading(true);
       if (!data.followers || !data.following) {
         setResult({ error: "Both files are required." });
         return;
@@ -203,6 +204,8 @@ function UploadForm() {
       setResult({
         error: `Failed to read or parse JSON files. ${errorMessage}`,
       });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -244,7 +247,19 @@ function UploadForm() {
         </div>
 
         <div className="mt-4">
-          <ButtonSubmit name="checking" />
+          <button
+            disabled={loading}
+            type="submit"
+            className="btn btn-soft btn-accent w-full capitalize"
+          >
+            {loading ? (
+              <>
+                <span className="loading loading-spinner bg-accent"></span>
+              </>
+            ) : (
+              "Checking"
+            )}
+          </button>
         </div>
       </form>
     </>
