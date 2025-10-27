@@ -1,48 +1,64 @@
-const TableResult = ({ data, message }: any) => {
+// src/components/ui/TableResult.tsx
+import { flexRender } from "@tanstack/react-table";
+
+const TableResult = ({ table, message }: any) => {
+  const rows = table.getRowModel().rows;
+  const { pageIndex, pageSize } = table.getState().pagination;
+
   return (
-    <>
-      <div className="overflow-x-auto">
-        {data.length > 0 ? (
-          <table className="table">
-            <thead>
-              <tr className="font-bold text-base text-accent">
-                <th>No</th>
-                <th>Name</th>
-                <th>Followed since</th>
+    <div className="overflow-x-auto">
+      {rows.length > 0 ? (
+        <table className="table w-full">
+          <thead>
+            {table.getHeaderGroups().map((headerGroup: any) => (
+              <tr
+                key={headerGroup.id}
+                className="font-bold text-base text-accent"
+              >
+                {headerGroup.headers.map((header: any) => (
+                  <th key={header.id}>
+                    {flexRender(
+                      header.column.columnDef.header,
+                      header.getContext()
+                    )}
+                  </th>
+                ))}
               </tr>
-            </thead>
-            <tbody>
-              {data.map((v: any, i: number) => (
-                <tr key={v.username}>
-                  <td>{i + 1}</td>
-                  <td>
-                    <div className="flex items-center gap-3">
-                      <div className="font-semibold hover:underline">
-                        <a href={v.link}>{v.username}</a>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <span className="block text-sm text-gray-500">
-                      {v.time
-                        ? new Date(v.time * 1000).toLocaleString()
-                        : "Unknown"}
-                    </span>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        ) : (
-          <div>
-            <div className="flex justify-center w-full">
-              <img src="yeaay.webp" alt="icon-capybara" className="mt-5" />
-            </div>
-            <p className="text-center font-semibold text-lg">{message}</p>
+            ))}
+          </thead>
+
+          <tbody>
+            {rows.map((row: any, rowIndex: number) => (
+              <tr key={row.id}>
+                {row.getVisibleCells().map((cell: any, cellIndex: number) => {
+                  // Jika kolom pertama adalah "No", kita render nomor baris dari pagination
+                  if (cell.column.id === "no") {
+                    const globalNumber = pageIndex * pageSize + rowIndex + 1;
+                    return <td key={cell.id}>{globalNumber}</td>;
+                  }
+                  return (
+                    <td key={cell.id}>
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
+                    </td>
+                  );
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        <div className="text-center">
+          <div className="flex justify-center w-full">
+            <img src="/yeaay.webp" alt="icon-capybara" className="mt-5" />
           </div>
-        )}
-      </div>
-    </>
+          <p className="text-center font-semibold text-lg">{message}</p>
+        </div>
+      )}
+    </div>
   );
 };
+
 export default TableResult;
