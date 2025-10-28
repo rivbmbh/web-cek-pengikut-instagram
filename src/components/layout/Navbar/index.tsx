@@ -28,21 +28,44 @@ const Navbar = () => {
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
             >
               <li>
-                <a>Home</a>
+                <NavLink
+                  to="/"
+                  className={({ isActive }) =>
+                    isActive ? "font-bold text-accent" : ""
+                  }
+                >
+                  Home
+                </NavLink>
               </li>
               <li>
-                <a>Parent</a>
-                <ul className="p-2">
-                  <li>
-                    <a>Submenu 1</a>
-                  </li>
-                  <li>
-                    <a>Submenu 2</a>
-                  </li>
-                </ul>
+                <NavLink
+                  to="/tutorial"
+                  className={({ isActive }) =>
+                    isActive ? "font-bold text-accent" : ""
+                  }
+                >
+                  Tutorial
+                </NavLink>
               </li>
               <li>
-                <a>Item 3</a>
+                <NavLink
+                  to="/upload"
+                  className={({ isActive }) =>
+                    isActive ? "font-bold text-accent" : ""
+                  }
+                >
+                  Upload
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/result"
+                  className={({ isActive }) =>
+                    isActive ? "font-bold text-accent" : ""
+                  }
+                >
+                  Result
+                </NavLink>
               </li>
             </ul>
           </div>
