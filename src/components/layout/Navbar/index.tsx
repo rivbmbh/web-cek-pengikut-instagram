@@ -46,7 +46,14 @@ const Navbar = () => {
               </li>
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl font-bold">CheckUP</a>
+          <a className="btn btn-ghost text-xl font-bold">
+            <p className="bg-linear-to-r from-accent via-teal-200 to-emerald-300 bg-clip-text text-2xl font-extrabold text-transparent ...">
+              Insta
+              <span className="bg-linear-to-r bg-clip-text from-emerald-200 via-teal-200 to-accent">
+                Cik
+              </span>
+            </p>
+          </a>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
@@ -107,7 +114,13 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end">
-          <a className="btn">DONATE</a>
+          <a
+            href="https://saweria.co/sangiaradigital"
+            target="_blank"
+            className="btn"
+          >
+            DONATE
+          </a>
         </div>
       </div>
     </>
