@@ -3,7 +3,7 @@ import UploadForm from "@/components/forms/UploadForm";
 const Upload = () => {
   return (
     <>
-      <div className="flex justify-center w-full items-center pt-9 sm:pt-7 ">
+      <div className="flex justify-center w-full items-center pt-9 sm:pt-7 px-4">
         <div className="container px-4 sm:px-0 mx-auto">
           <h2 className="text-3xl text-center font-bold py-5">
             Find out who’s not following you back on Instagram

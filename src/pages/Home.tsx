@@ -3,7 +3,7 @@ import { TypeAnimation } from "react-type-animation";
 const Home = () => {
   return (
     <>
-      <div className="w-full flex flex-col items-center py-7 mt-14 justify-center gap-3">
+      <div className="w-full flex flex-col items-center px-4 py-7 mt-14 justify-center gap-3">
         <h1 className="bg-linear-to-r from-accent via-teal-200 to-emerald-300 bg-clip-text text-6xl font-extrabold text-transparent ...">
           Insta
           <span className="bg-linear-to-r bg-clip-text from-emerald-200 via-teal-200 to-accent">
