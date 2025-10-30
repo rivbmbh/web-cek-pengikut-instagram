@@ -1,0 +1,79 @@
+{
+  "tutorial_data": [
+    {
+      "imgTitle": "1",
+      "imgCaption": "Buka instagram lalu masuk ke menu profile dan klik icon hamburger",
+      "imgCaptionEnglish": "Open Instagram, go to your profile menu, and tap the hamburger icon"
+    },
+    {
+      "imgTitle": "2",
+      "imgCaption": "Masuk ke Account Center",
+      "imgCaptionEnglish": "Go to Account Center"
+    },
+    {
+      "imgTitle": "3",
+      "imgCaption": "Klik Your Information and permissions",
+      "imgCaptionEnglish": "Tap Your Information and Permissions"
+    },
+    {
+      "imgTitle": "4",
+      "imgCaption": "Lalu klik Export your information",
+      "imgCaptionEnglish": "Then tap Export Your Information"
+    },
+    {
+      "imgTitle": "5",
+      "imgCaption": "Lalu Create Export",
+      "imgCaptionEnglish": "Then select Create Export"
+    },
+    {
+      "imgTitle": "6",
+      "imgCaption": "Pilih akun yang akan diexport datanya",
+      "imgCaptionEnglish": "Choose the account whose data you want to export"
+    },
+    {
+      "imgTitle": "7",
+      "imgCaption": "Setelah itu pilih Export to device",
+      "imgCaptionEnglish": "Next, select Export to Device"
+    },
+    {
+      "imgTitle": "8",
+      "imgCaption": "Klik Customize information",
+      "imgCaptionEnglish": "Tap Customize Information"
+    },
+    {
+      "imgTitle": "9",
+      "imgCaption": "Lalu pada custom information ini cukup centang yang 'Followers and following'",
+      "imgCaptionEnglish": "In the custom information section, check only 'Followers and Following'"
+    },
+    {
+      "imgTitle": "10",
+      "imgCaption": "Lalu atur Date range ke All time dan Format ke JSON, sesuaikan seperti pada gambar",
+      "imgCaptionEnglish": "Then set the Date Range to All time and Format to JSON, just like in the image"
+    },
+    {
+      "imgTitle": "11",
+      "imgCaption": "Setelah semua sudah disesuikan klik Start export",
+      "imgCaptionEnglish": "Once everything is set, tap Start Export"
+    },
+    {
+      "imgTitle": "12",
+      "imgCaption": "Masukan password",
+      "imgCaptionEnglish": "Enter your password"
+    },
+    {
+      "imgTitle": "13",
+      "imgCaption": "Setelah selesai tunggu sekitar 2-3 jam atau tunggu notifikasi dari Instagram jika data sudah siap diunduh",
+      "imgCaptionEnglish": "After that, wait about 2–3 hours or until you receive a notification from Instagram that your data is ready to download"
+    },
+    {
+      "imgTitle": "14",
+      "imgCaption": "Jika sudah siap datanya akan tampil seperti di gambar, lalu Download",
+      "imgCaptionEnglish": "Once your data is ready, it will appear like in the image — then tap Download"
+    },
+    {
+      "imgTitle": "15",
+      "imgCaption": "Extract file-nya masuk ke folder connections > followers_and_following lalu cari file yang akan diupload sesuai namanya pada halaman Upload nanti",
+      "imgCaptionEnglish": "Extract the file, go to the connections > followers_and_following folder, and find the file that will be uploaded later on the Upload page"
+    }
+  ]
+}
