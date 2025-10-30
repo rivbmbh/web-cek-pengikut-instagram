@@ -25,18 +25,26 @@ const Result: React.FC = () => {
 
   if (!result) {
     return (
-      <div className="text-center mt-10">
-        <img src="/blee.webp" alt="capybara" className="mx-auto" />
-        <p className="text-base font-semibold my-4">
-          No data found. Please upload your files first.
-        </p>
-        <button
-          onClick={() => navigate("/upload")}
-          className="btn btn-accent mt-4"
-        >
-          Go to Upload Page
-        </button>
-      </div>
+      <>
+        <div className="hero bg-base-200 min-h-screen">
+          <div className="hero-content text-center">
+            <div className="max-w-md">
+              <div className="text-center">
+                <img src="/blee.webp" alt="capybara" className="mx-auto" />
+                <p className="text-base font-semibold my-4">
+                  No data found. Please upload your files first.
+                </p>
+                <button
+                  onClick={() => navigate("/upload")}
+                  className="btn btn-accent mt-4"
+                >
+                  Go to Upload Page
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </>
     );
   }
 
