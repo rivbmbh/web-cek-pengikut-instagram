@@ -72,6 +72,16 @@ const Navbar = () => {
               </li>
               <li>
                 <NavLink
+                  to="/privacy"
+                  className={({ isActive }) =>
+                    isActive ? "font-bold text-accent" : ""
+                  }
+                >
+                  Privacy
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
                   to="https://saweria.co/sangiaradigital"
                   target="_blank"
                   className="btn w-max"
@@ -134,6 +144,16 @@ const Navbar = () => {
                 }
               >
                 Result
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/privacy"
+                className={({ isActive }) =>
+                  isActive ? "font-bold text-accent" : ""
+                }
+              >
+                Privacy
               </NavLink>
             </li>
           </ul>

@@ -14,6 +14,7 @@ import Searching from "@/components/ui/Searching";
 import ShowEntrieDataTable from "@/components/ui/ShowEntriesDataTable";
 import { getColumns } from "@/components/ui/TableResult/columns";
 import { useChangeLanguage } from "@/features/language/components/ChangeLanguageContext";
+import { SeoHead } from "@/components/SeoHead";
 
 const Result: React.FC = () => {
   const location = useLocation();
@@ -27,6 +28,10 @@ const Result: React.FC = () => {
   if (!result) {
     return (
       <>
+        <SeoHead
+          title="Result | InstaCik"
+          description="Lihat hasilnya siapa saja yang unfollow kamu"
+        />
         <div className="hero bg-base-200 min-h-screen">
           <div className="hero-content text-center">
             <div className="max-w-md">
@@ -127,65 +132,74 @@ const Result: React.FC = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-10">
-      {/* Search & Show Per Page */}
-      <div className="flex flex-wrap gap-4 justify-baseline sm:justify-between mb-10">
-        <ShowEntrieDataTable
-          paginationFollowing={paginationFollowing}
-          handlePageSizeChange={handlePageSizeChange}
-        />
-
-        <Searching
-          globalFilter={globalFilter}
-          setGlobalFilter={setGlobalFilter}
-        />
-      </div>
-
-      {/* Dua tabel hasil */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-20 sm:gap-10">
-        {/* TABLE 1 */}
-        <div>
-          <h3 className="font-bold text-2xl text-center mb-2">
-            {isEnglish
-              ? "You follow but they don’t follow back"
-              : "Kamu ikuti mereka tapi kamu nggak diikuti balik"}
-          </h3>
-          <TableResult
-            table={tableFollowing}
-            message={[
-              "Everyone you follow, follows you back",
-              "Semua orang yang ikuti kamu, mengikuti balik kamu juga",
-            ]}
-            isEnglish={isEnglish}
+    <>
+      <SeoHead
+        title="Result | InstaCik"
+        description="Lihat hasilnya siapa saja yang unfollow kamu"
+      />
+      <div className="container mx-auto px-4 py-10">
+        {/* Search & Show Per Page */}
+        <div className="flex flex-wrap gap-4 justify-baseline sm:justify-between mb-10">
+          <ShowEntrieDataTable
+            paginationFollowing={paginationFollowing}
+            handlePageSizeChange={handlePageSizeChange}
           />
-          <Pagination table={tableFollowing} />
-        </div>
-        <hr className="block sm:hidden" />
-        {/* TABLE 2 */}
-        <div className="">
-          <h3 className="font-bold text-2xl text-center mb-2">
-            {isEnglish
-              ? "They follow you but you don’t follow back"
-              : "Mereka ikuti kamu tapi kamu nggak ikuti balik"}
-          </h3>
-          <TableResult
-            table={tableFollowed}
-            message={[
-              "You follow everyone who follows you",
-              "Kamu mengikuti semua orang yang ikuti kamu juga",
-            ]}
-            isEnglish={isEnglish}
-          />
-          <Pagination table={tableFollowed} />
-        </div>
-      </div>
 
-      <div className="text-center mt-14">
-        <button onClick={() => navigate("/upload")} className="btn btn-accent">
-          {isEnglish ? "Check Again" : "Cek Ulang"}
-        </button>
+          <Searching
+            globalFilter={globalFilter}
+            setGlobalFilter={setGlobalFilter}
+          />
+        </div>
+
+        {/* Dua tabel hasil */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-20 sm:gap-10">
+          {/* TABLE 1 */}
+          <div>
+            <h3 className="font-bold text-2xl text-center mb-2">
+              {isEnglish
+                ? "You follow but they don’t follow back"
+                : "Kamu ikuti mereka tapi kamu nggak diikuti balik"}
+            </h3>
+            <TableResult
+              table={tableFollowing}
+              message={[
+                "Everyone you follow, follows you back",
+                "Semua orang yang ikuti kamu, mengikuti balik kamu juga",
+              ]}
+              isEnglish={isEnglish}
+            />
+            <Pagination table={tableFollowing} />
+          </div>
+          <hr className="block sm:hidden" />
+          {/* TABLE 2 */}
+          <div className="">
+            <h3 className="font-bold text-2xl text-center mb-2">
+              {isEnglish
+                ? "They follow you but you don’t follow back"
+                : "Mereka ikuti kamu tapi kamu nggak ikuti balik"}
+            </h3>
+            <TableResult
+              table={tableFollowed}
+              message={[
+                "You follow everyone who follows you",
+                "Kamu mengikuti semua orang yang ikuti kamu juga",
+              ]}
+              isEnglish={isEnglish}
+            />
+            <Pagination table={tableFollowed} />
+          </div>
+        </div>
+
+        <div className="text-center mt-14">
+          <button
+            onClick={() => navigate("/upload")}
+            className="btn btn-accent"
+          >
+            {isEnglish ? "Check Again" : "Cek Ulang"}
+          </button>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

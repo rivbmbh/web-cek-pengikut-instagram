@@ -5,6 +5,7 @@ import Upload from "@/pages/Upload";
 import Tutorial from "@/pages/Tutorial";
 import Result from "@/pages/Result";
 import NotFound from "@/pages/NotFound";
+import Privacy from "@/pages/Privacy";
 
 export const router = createBrowserRouter([
   {
@@ -15,6 +16,7 @@ export const router = createBrowserRouter([
       { path: "upload", element: <Upload /> },
       { path: "tutorial", element: <Tutorial /> },
       { path: "result", element: <Result /> },
+      { path: "privacy", element: <Privacy /> },
       { path: "*", element: <NotFound /> },
     ],
   },

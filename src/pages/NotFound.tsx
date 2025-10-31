@@ -1,9 +1,11 @@
+import { SeoHead } from "@/components/SeoHead";
 import { useChangeLanguage } from "@/features/language/components/ChangeLanguageContext";
 
 const NotFound = () => {
   const { isEnglish } = useChangeLanguage();
   return (
     <>
+      <SeoHead title="404 | InstaCik" description="Halaman tidak ditemukan" />
       <div className="hero bg-base-200 min-h-screen">
         <div className="hero-content text-center">
           <div className="max-w-md">

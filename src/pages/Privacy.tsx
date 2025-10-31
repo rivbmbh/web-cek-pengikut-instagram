@@ -2,13 +2,13 @@ import { SeoHead } from "@/components/SeoHead";
 import { useChangeLanguage } from "@/features/language/components/ChangeLanguageContext";
 import { TypeAnimation } from "react-type-animation";
 
-const Home = () => {
+const Privacy = () => {
   const { isEnglish } = useChangeLanguage();
   return (
     <>
       <SeoHead
-        title="Home | InstaCik"
-        description="Cari tau yang unfollow kamu di Instagram dengan InstaCik"
+        title="Privacy | InstaCik"
+        description="Cari tau bagaimana kami mengelolah data anda. Kami tidak menyimpan data yang anda unggah pada halaman upload semua hanya bersifat static tidak disimpan pada database atau storage manapun"
       />
       <div className="hero bg-base-200 min-h-screen">
         <div className="hero-content text-center">
@@ -55,4 +55,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Privacy;

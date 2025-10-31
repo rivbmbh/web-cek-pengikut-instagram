@@ -1,11 +1,16 @@
 import TutorialImages from "@/components/ui/Wrapper/TutorialImages";
 import tutorialData from "../data/tutorial.json";
 import { useChangeLanguage } from "@/features/language/components/ChangeLanguageContext";
+import { SeoHead } from "@/components/SeoHead";
 
 const Tutorial = () => {
   const { isEnglish } = useChangeLanguage();
   return (
     <>
+      <SeoHead
+        title="Tutorial | InstaCik"
+        description="Tutorial mengetahui siapa yang unfollow kamu di Instagram dengan export data JSON-nya"
+      />
       <div className="w-full min-h-screen px-4">
         <div className="container mx-auto">
           <div className="w-full flex flex-col justify-center mt-10 pt-10">

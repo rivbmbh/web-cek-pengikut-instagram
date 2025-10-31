@@ -1,10 +1,15 @@
 import UploadForm from "@/components/forms/UploadForm";
+import { SeoHead } from "@/components/SeoHead";
 import { useChangeLanguage } from "@/features/language/components/ChangeLanguageContext";
 
 const Upload = () => {
   const { isEnglish } = useChangeLanguage();
   return (
     <>
+      <SeoHead
+        title="Upload | InstaCik"
+        description="Upload file JSON hasil export dari Instagram kamu untuk mengetahui siapa yang tidak follback kamu"
+      />
       <div className="hero bg-base-200 min-h-screen">
         <div className="hero-content text-center">
           <div className="max-w-md">
