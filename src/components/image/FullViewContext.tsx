@@ -1,10 +1,5 @@
-import { createContext, useContext, useState, type ReactNode } from "react";
-
-interface FullViewContextType {
-  viewingImage: string | null;
-  openImage: (src: string) => void;
-  closeImage: () => void;
-}
+import type { FullViewContextType, FullViewProviderProps } from "@/types";
+import { createContext, useContext, useState } from "react";
 
 const FullViewContext = createContext<FullViewContextType | undefined>(
   undefined
@@ -18,14 +13,10 @@ export const useImageFullView = (): FullViewContextType => {
   return context;
 };
 
-interface FullViewProviderProps {
-  children: ReactNode;
-}
-
 export const FullViewProvider = ({ children }: FullViewProviderProps) => {
   const [viewingImage, setViewingImage] = useState<string | null>(null);
 
-  console.log(viewingImage);
+  // console.log(viewingImage);
 
   const openImage = (src: string) => {
     console.log(src);

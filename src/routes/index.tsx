@@ -15,7 +15,7 @@ export const router = createBrowserRouter([
       { path: "upload", element: <Upload /> },
       { path: "tutorial", element: <Tutorial /> },
       { path: "result", element: <Result /> },
+      { path: "*", element: <NotFound /> },
     ],
   },
-  { path: "*", element: <NotFound /> },
 ]);

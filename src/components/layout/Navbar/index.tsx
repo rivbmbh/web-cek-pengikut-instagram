@@ -1,3 +1,4 @@
+import ChangeLanguage from "@/components/ui/ChangeLanguage";
 import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
@@ -6,6 +7,7 @@ const Navbar = () => {
       <div className="navbar bg-base-100 shadow-sm">
         <div className="navbar-start">
           <div className="dropdown">
+            {/* burger */}
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -23,9 +25,10 @@ const Navbar = () => {
                 />{" "}
               </svg>
             </div>
+            {/* mobile navlink */}
             <ul
               tabIndex="-1"
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow gap-2"
             >
               <li>
                 <NavLink
@@ -67,8 +70,19 @@ const Navbar = () => {
                   Result
                 </NavLink>
               </li>
+              <li>
+                <NavLink
+                  to="https://saweria.co/sangiaradigital"
+                  target="_blank"
+                  className="btn w-max"
+                >
+                  DONATE
+                </NavLink>
+              </li>
             </ul>
           </div>
+
+          {/* logo */}
           <a className="btn btn-ghost text-xl font-bold">
             <p className="bg-linear-to-r from-accent via-teal-200 to-emerald-300 bg-clip-text text-2xl font-extrabold text-transparent ...">
               Insta
@@ -78,6 +92,7 @@ const Navbar = () => {
             </p>
           </a>
         </div>
+        {/* navlink dekstop */}
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
             <li>
@@ -100,19 +115,6 @@ const Navbar = () => {
                 Tutorial
               </NavLink>
             </li>
-            {/* <li>
-              <details>
-                <summary>Pages</summary>
-                <ul className="p-2">
-                  <li>
-                    <a>Submenu 1</a>
-                  </li>
-                  <li>
-                    <a>Submenu 2</a>
-                  </li>
-                </ul>
-              </details>
-            </li> */}
             <li>
               <NavLink
                 to="/upload"
@@ -136,11 +138,14 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
-        <div className="navbar-end">
+        <div className="navbar-end gap-x-7">
+          <div className="px-2 md:px-0">
+            <ChangeLanguage />
+          </div>
           <a
             href="https://saweria.co/sangiaradigital"
             target="_blank"
-            className="btn"
+            className="btn hidden sm:flex"
           >
             DONATE
           </a>

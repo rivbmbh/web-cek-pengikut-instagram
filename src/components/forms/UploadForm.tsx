@@ -9,7 +9,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 
-function UploadForm() {
+function UploadForm({ isEnglish }) {
   const [result, setResult] = useState<{
     notFollowingBack?: string[]; // you follow them, they don't follow you back
     notFollowedBack?: string[]; // they follow you, you don't follow back
@@ -136,7 +136,11 @@ function UploadForm() {
     try {
       setLoading(true);
       if (!data.followers || !data.following) {
-        setResult({ error: "Both files are required." });
+        if (isEnglish) {
+          setResult({ error: "Both files are required." });
+          return;
+        }
+        setResult({ error: "Kedua file wajib diupload." });
         return;
       }
 
@@ -169,14 +173,32 @@ function UploadForm() {
 
       //cek jika format file json bukan seperti dari instgram maka tampil error message
       if (followersArr.length === 0 || followingArr.length === 0) {
-        toast.error("The uploaded files don't contain valid Instagram data.", {
-          icon: ({ theme, type }) => <img src="error.webp" />,
-          position: "top-center",
-          theme: "colored",
-        });
+        if (isEnglish) {
+          toast.error(
+            "The uploaded files don't contain valid Instagram data.",
+            {
+              icon: ({ theme, type }) => <img src="error.webp" />,
+              position: "top-center",
+              theme: "colored",
+            }
+          );
+          setResult({
+            error:
+              "No valid data found. Please make sure you upload Instagram export files.",
+          });
+          return;
+        }
+        toast.error(
+          "File yang kamu upload tidak sesuai dengan struktur data dari Instagram",
+          {
+            icon: ({ theme, type }) => <img src="error.webp" />,
+            position: "top-center",
+            theme: "colored",
+          }
+        );
         setResult({
           error:
-            "No valid data found. Please make sure you upload Instagram export files.",
+            "Data nggak ditemukan. Pastikan kamu udah upload file ekspor dari Instagram, ya!",
         });
         return;
       }
@@ -218,7 +240,9 @@ function UploadForm() {
       >
         <div className="flex flex-col gap-2">
           <label htmlFor="followersFile" className="font-semibold text-base">
-            Upload JSON file (e.g., followers_1.json)
+            {isEnglish
+              ? "Upload JSON file (e.g., followers_1.json)"
+              : "Unggah JSON file (misalnya, followers_1.json)"}
           </label>
           <input
             type="file"
@@ -233,7 +257,9 @@ function UploadForm() {
 
         <div className="flex flex-col gap-2">
           <label htmlFor="followersFile" className="font-semibold text-base">
-            Upload JSON file (e.g., following.json)
+            {isEnglish
+              ? "Upload JSON file (e.g., following.json)"
+              : "Unggah JSON file (misalnya, following.json)"}
           </label>
           <input
             type="file"
@@ -256,8 +282,10 @@ function UploadForm() {
               <>
                 <span className="loading loading-spinner bg-accent"></span>
               </>
-            ) : (
+            ) : isEnglish ? (
               "Checking"
+            ) : (
+              "Cek sekarang"
             )}
           </button>
         </div>

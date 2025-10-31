@@ -14,10 +14,12 @@ import Pagination from "@/components/ui/Pagination";
 import Searching from "@/components/ui/Searching";
 import ShowEntrieDataTable from "@/components/ui/ShowEntriesDataTable";
 import { getColumns } from "@/components/ui/TableResult/columns";
+import { useChangeLanguage } from "@/features/language/components/ChangeLanguageContext";
 
 const Result: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { isEnglish } = useChangeLanguage();
 
   const result = location.state as
     | { notFollowingBack: any[]; notFollowedBack: any[] }
@@ -32,13 +34,17 @@ const Result: React.FC = () => {
               <div className="text-center">
                 <img src="/blee.webp" alt="capybara" className="mx-auto" />
                 <p className="text-base font-semibold my-4">
-                  No data found. Please upload your files first.
+                  {isEnglish
+                    ? "No data found. Please upload your files first."
+                    : "Tidak ada data ditemukan. Upload terlebih dahulu filenya"}
                 </p>
                 <button
                   onClick={() => navigate("/upload")}
                   className="btn btn-accent mt-4"
                 >
-                  Go to Upload Page
+                  {isEnglish
+                    ? "Go to Upload Page"
+                    : "Kembali ke halaman Upload"}
                 </button>
               </div>
             </div>
@@ -141,11 +147,17 @@ const Result: React.FC = () => {
         {/* TABLE 1 */}
         <div>
           <h3 className="font-bold text-2xl text-center mb-2">
-            You follow but they don’t follow back
+            {isEnglish
+              ? "You follow but they don’t follow back"
+              : "Kamu ikuti mereka tapi kamu nggak diikuti balik"}
           </h3>
           <TableResult
             table={tableFollowing}
-            message="Everyone you follow follows you back"
+            message={[
+              "Everyone you follow, follows you back",
+              "Semua orang yang ikuti kamu, mengikuti balik kamu juga",
+            ]}
+            isEnglish={isEnglish}
           />
           <Pagination table={tableFollowing} />
         </div>
@@ -153,11 +165,17 @@ const Result: React.FC = () => {
         {/* TABLE 2 */}
         <div className="">
           <h3 className="font-bold text-2xl text-center mb-2">
-            They follow you but you don’t follow back
+            {isEnglish
+              ? "They follow you but you don’t follow back"
+              : "Mereka ikuti kamu tapi kamu nggak ikuti balik"}
           </h3>
           <TableResult
             table={tableFollowed}
-            message="You follow everyone who follows you"
+            message={[
+              "You follow everyone who follows you",
+              "Kamu mengikuti semua orang yang ikuti kamu juga",
+            ]}
+            isEnglish={isEnglish}
           />
           <Pagination table={tableFollowed} />
         </div>
@@ -165,7 +183,7 @@ const Result: React.FC = () => {
 
       <div className="text-center mt-14">
         <button onClick={() => navigate("/upload")} className="btn btn-accent">
-          Check Again
+          {isEnglish ? "Check Again" : "Cek Ulang"}
         </button>
       </div>
     </div>

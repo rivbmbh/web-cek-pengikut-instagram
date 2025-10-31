@@ -1,7 +1,8 @@
 // src/components/ui/TableResult.tsx
+import type { TableResultProps } from "@/types";
 import { flexRender } from "@tanstack/react-table";
 
-const TableResult = ({ table, message }: any) => {
+const TableResult = ({ table, message, isEnglish }: TableResultProps) => {
   const rows = table.getRowModel().rows;
   const { pageIndex, pageSize } = table.getState().pagination;
 
@@ -54,7 +55,9 @@ const TableResult = ({ table, message }: any) => {
           <div className="flex justify-center w-full">
             <img src="/yeaay.webp" alt="icon-capybara" className="mt-5" />
           </div>
-          <p className="text-center font-semibold text-lg">{message}</p>
+          <p className="text-center font-semibold text-lg">
+            {isEnglish ? message[0] : message[1]}
+          </p>
         </div>
       )}
     </div>

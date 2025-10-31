@@ -1,6 +1,5 @@
-interface FileInputProps {
-  id: string;
-}
+import type { FileInputProps } from "@/types";
+
 const FileInput = ({ id }: FileInputProps) => {
   return (
     <>

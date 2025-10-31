@@ -1,6 +1,8 @@
+import { useChangeLanguage } from "@/features/language/components/ChangeLanguageContext";
 import { TypeAnimation } from "react-type-animation";
 
 const Home = () => {
+  const { isEnglish } = useChangeLanguage();
   return (
     <>
       <div className="hero bg-base-200 min-h-screen">
@@ -18,10 +20,17 @@ const Home = () => {
             <div className="space-y-4">
               <p className="text-3xl font-bold text-center">
                 <TypeAnimation
-                  sequence={[
-                    "Find out who’s following, unfollowing, or ghosting you!",
-                    500,
-                  ]}
+                  sequence={
+                    isEnglish
+                      ? [
+                          "Find out who’s following, unfollowing, or ghosting you!",
+                          500,
+                        ]
+                      : [
+                          "Cari tahu siapa yang ngikutin kamu, berhenti ngikutin, atau cuma ngintip doang tanpa interaksi!",
+                          500,
+                        ]
+                  }
                   speed={40}
                   repeat={Infinity}
                 />
@@ -30,7 +39,7 @@ const Home = () => {
             <div className="text-center mt-14">
               <button className="btn btn-dash btn-accent text-lg uppercase">
                 <a href="/upload" className="py-5">
-                  Get Started
+                  {isEnglish ? "Get started" : "Mulai sekarang"}
                 </a>
               </button>
             </div>

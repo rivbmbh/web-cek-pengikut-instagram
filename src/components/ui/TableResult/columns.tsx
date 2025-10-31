@@ -1,12 +1,8 @@
 // 📁 src/components/tables/columns.ts
+import type { TableData } from "@/types";
 import type { ColumnDef } from "@tanstack/react-table";
 
 // Bisa kamu buat tipe data lebih spesifik kalau mau
-export interface TableData {
-  username: string;
-  link?: string;
-  time?: number;
-}
 
 export const getColumns = (isFollowing: boolean): ColumnDef<TableData>[] => [
   {
