@@ -7,7 +7,6 @@ import {
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
-  type ColumnDef,
   type SortingState,
 } from "@tanstack/react-table";
 import Pagination from "@/components/ui/Pagination";

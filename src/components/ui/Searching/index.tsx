@@ -1,4 +1,6 @@
-const Searching = ({ globalFilter, setGlobalFilter }) => {
+import type { SearchingProps } from "@/types";
+
+const Searching = ({ globalFilter, setGlobalFilter }: SearchingProps) => {
   //   const [globalFilter, setGlobalFilter] = useState("");
 
   return (

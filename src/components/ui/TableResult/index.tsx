@@ -31,7 +31,7 @@ const TableResult = ({ table, message, isEnglish }: TableResultProps) => {
           <tbody>
             {rows.map((row: any, rowIndex: number) => (
               <tr key={row.id}>
-                {row.getVisibleCells().map((cell: any, cellIndex: number) => {
+                {row.getVisibleCells().map((cell: any) => {
                   // Jika kolom pertama adalah "No", kita render nomor baris dari pagination
                   if (cell.column.id === "no") {
                     const globalNumber = pageIndex * pageSize + rowIndex + 1;

@@ -41,3 +41,16 @@ export interface TableData {
   link?: string;
   time?: number;
 }
+
+export type Timestamp = number | string | undefined;
+
+export interface SocialEntry {
+  username: string;
+  link?: string;
+  time?: Timestamp;
+}
+
+export interface SearchingProps {
+  globalFilter: string;
+  setGlobalFilter: (value: string) => void;
+}

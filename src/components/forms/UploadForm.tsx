@@ -8,9 +8,14 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
+import type { SocialEntry } from "@/types";
 
-function UploadForm({ isEnglish }) {
-  const [result, setResult] = useState<{
+interface UploadFormProps {
+  isEnglish: boolean;
+}
+
+function UploadForm({ isEnglish }: UploadFormProps) {
+  const [, setResult] = useState<{
     notFollowingBack?: string[]; // you follow them, they don't follow you back
     notFollowedBack?: string[]; // they follow you, you don't follow back
     error?: string;
@@ -32,84 +37,114 @@ function UploadForm({ isEnglish }) {
   };
 
   // helper: ekstrak username dari struktur followers (array at root)
-  const extractFollowers = (data: any): string[] => {
-    if (!data) return []; //jika data tidak ada kembalikan array kosong
+  const extractFollowers = (data: unknown): SocialEntry[] => {
+    if (!data) return [];
 
-    //ubah object>array
+    // jika array di root
     if (Array.isArray(data)) {
-      return data
-        .flatMap((item: any) => {
-          // prefer value, fallback to href processing if needed
-          const sld = item?.string_list_data;
-          if (!sld || !Array.isArray(sld)) return [];
-          // sometimes value exists, sometimes only href
-          return sld.map((s: any) => {
-            return {
-              username: s.value ?? extractUsernameFromHref(s.href),
-              link: s.href,
-              time: s.timestamp,
-            };
+      const out: SocialEntry[] = [];
+      data.forEach((item) => {
+        const sld = item?.string_list_data;
+        if (!Array.isArray(sld)) return;
+        sld.forEach((s: any) => {
+          const username = (
+            typeof s?.value === "string"
+              ? s.value
+              : extractUsernameFromHref(s?.href)
+          ) as string | undefined;
+          if (!username) return;
+          out.push({
+            username,
+            link: typeof s?.href === "string" ? s.href : undefined,
+            time: s?.timestamp,
           });
-        })
-        .filter(Boolean);
+        });
+      });
+      return out;
     }
-    // fallback: try some other possible shapes
-    if (Array.isArray(data?.relationships_followers)) {
-      return data.relationships_followers.flatMap(
-        (item: any) =>
-          item.string_list_data?.map((s: any) => {
-            return {
-              username: s.value ?? extractUsernameFromHref(s.href),
-              link: s.href,
-              time: s.timestamp,
-            };
-          }) || []
-      );
+
+    // jika object dengan relationships_followers
+    if (Array.isArray((data as any)?.relationships_followers)) {
+      const out: SocialEntry[] = [];
+      (data as any).relationships_followers.forEach((item: any) => {
+        const sld = item?.string_list_data;
+        if (!Array.isArray(sld)) return;
+        sld.forEach((s: any) => {
+          const username = (
+            typeof s?.value === "string"
+              ? s.value
+              : extractUsernameFromHref(s?.href)
+          ) as string | undefined;
+          if (!username) return;
+          out.push({
+            username,
+            link: typeof s?.href === "string" ? s.href : undefined,
+            time: s?.timestamp,
+          });
+        });
+      });
+      return out;
     }
+
     return [];
   };
   // helper: ekstrak username dari struktur following (object.relationships_following)
-  const extractFollowing = (
-    data: any
-  ): { username: string; link?: string; time?: number }[] => {
+  const extractFollowing = (data: unknown): SocialEntry[] => {
     if (!data) return [];
 
     if (Array.isArray(data)) {
-      return data
-        .flatMap((item: any) => {
-          const sld = item?.string_list_data;
-          if (!sld || !Array.isArray(sld)) return [];
-          return sld.map((s: any) => ({
-            username: s.value ?? extractUsernameFromHref(s.href),
-            link: s.href,
-            time: s.timestamp,
-          }));
-        })
-        .filter(Boolean);
+      const out: SocialEntry[] = [];
+      data.forEach((item) => {
+        const sld = item?.string_list_data;
+        if (!Array.isArray(sld)) return;
+        sld.forEach((s: any) => {
+          const username = (
+            typeof s?.value === "string"
+              ? s.value
+              : extractUsernameFromHref(s?.href)
+          ) as string | undefined;
+          if (!username) return;
+          out.push({
+            username,
+            link: typeof s?.href === "string" ? s.href : undefined,
+            time: s?.timestamp,
+          });
+        });
+      });
+      return out;
     }
 
-    if (Array.isArray(data.relationships_following)) {
-      return data.relationships_following
-        .flatMap((item: any) => {
-          if (item?.title) {
-            return [
-              {
-                username: item.title,
-                link: item?.string_list_data?.[0]?.href,
-                time: item?.string_list_data?.[0]?.timestamp,
-              },
-            ];
-          }
+    if (Array.isArray((data as any)?.relationships_following)) {
+      const out: SocialEntry[] = [];
+      (data as any).relationships_following.forEach((item: any) => {
+        if (item?.title && typeof item.title === "string") {
+          // when the entry uses `title` as username and has nested sld for link/time
+          const sld0 = item?.string_list_data?.[0];
+          out.push({
+            username: item.title,
+            link: typeof sld0?.href === "string" ? sld0.href : undefined,
+            time: sld0?.timestamp,
+          });
+          return;
+        }
 
-          const sld = item?.string_list_data;
-          if (!sld || !Array.isArray(sld)) return [];
-          return sld.map((s: any) => ({
-            username: s.value ?? extractUsernameFromHref(s.href),
-            link: s.href,
-            time: s.timestamp,
-          }));
-        })
-        .filter(Boolean);
+        const sld = item?.string_list_data;
+        if (!Array.isArray(sld)) return;
+        sld.forEach((s: any) => {
+          const username = (
+            typeof s?.value === "string"
+              ? s.value
+              : extractUsernameFromHref(s?.href)
+          ) as string | undefined;
+          if (!username) return;
+          out.push({
+            username,
+            link: typeof s?.href === "string" ? s.href : undefined,
+            time: s?.timestamp,
+          });
+        });
+      });
+      return out;
     }
 
     return [];
@@ -177,7 +212,7 @@ function UploadForm({ isEnglish }) {
           toast.error(
             "The uploaded files don't contain valid Instagram data.",
             {
-              icon: ({ theme, type }) => <img src="error.webp" />,
+              icon: () => <img src="error.webp" />,
               position: "top-center",
               theme: "colored",
             }
@@ -191,7 +226,7 @@ function UploadForm({ isEnglish }) {
         toast.error(
           "File yang kamu upload tidak sesuai dengan struktur data dari Instagram",
           {
-            icon: ({ theme, type }) => <img src="error.webp" />,
+            icon: () => <img src="error.webp" />,
             position: "top-center",
             theme: "colored",
           }
@@ -251,7 +286,9 @@ function UploadForm({ isEnglish }) {
             className="file-input file-input-accent"
           />
           {errors.followers && (
-            <p className="text-error text-sm">{errors.followers.message}</p>
+            <p className="text-error text-sm text-start">
+              {errors.followers?.message?.toString()}
+            </p>
           )}
         </div>
 
@@ -268,7 +305,9 @@ function UploadForm({ isEnglish }) {
             className="file-input file-input-accent"
           />
           {errors.following && (
-            <p className="text-error text-sm">{errors.following.message}</p>
+            <p className="text-error text-sm text-start">
+              {errors.following?.message?.toString()}
+            </p>
           )}
         </div>
 

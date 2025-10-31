@@ -1,6 +1,7 @@
 // 📁 src/components/tables/columns.ts
 import type { TableData } from "@/types";
 import type { ColumnDef } from "@tanstack/react-table";
+import type { ReactNode } from "react";
 
 // Bisa kamu buat tipe data lebih spesifik kalau mau
 
@@ -17,7 +18,7 @@ export const getColumns = (isFollowing: boolean): ColumnDef<TableData>[] => [
           rel="noopener noreferrer"
           className="font-semibold hover:underline"
         >
-          {info.getValue()}
+          {info.getValue() as ReactNode}
         </a>
       );
     },
