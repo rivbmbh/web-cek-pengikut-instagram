@@ -135,7 +135,7 @@ const Result: React.FC = () => {
     <>
       <SeoHead
         title="Result | InstaCik"
-        description="Lihat hasilnya siapa saja yang unfollow kamu"
+        description="Hasil analisis InstaCik: lihat siapa saja yang berhenti mengikuti kamu di Instagram dengan mudah dan cepat."
       />
       <div className="container mx-auto px-4 py-10">
         {/* Search & Show Per Page */}

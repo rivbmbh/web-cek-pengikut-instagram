@@ -9,7 +9,7 @@ const Tutorial = () => {
     <>
       <SeoHead
         title="Tutorial | InstaCik"
-        description="Tutorial mengetahui siapa yang unfollow kamu di Instagram dengan export data JSON-nya"
+        description="Panduan lengkap mengetahui siapa yang unfollow kamu di Instagram menggunakan file JSON hasil ekspor data."
       />
       <div className="w-full min-h-screen px-4">
         <div className="container mx-auto">

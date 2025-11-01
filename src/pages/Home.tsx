@@ -8,7 +8,7 @@ const Home = () => {
     <>
       <SeoHead
         title="Home | InstaCik"
-        description="Cari tau yang unfollow kamu di Instagram dengan InstaCik"
+        description="Cek siapa yang unfollow kamu di Instagram dengan InstaCik – cepat, aman, dan tanpa login!"
       />
       <div className="hero bg-base-200 min-h-screen">
         <div className="hero-content text-center">

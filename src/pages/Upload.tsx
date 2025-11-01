@@ -8,7 +8,7 @@ const Upload = () => {
     <>
       <SeoHead
         title="Upload | InstaCik"
-        description="Upload file JSON hasil export dari Instagram kamu untuk mengetahui siapa yang tidak follback kamu"
+        description="Unggah file JSON hasil ekspor dari Instagram kamu untuk melihat siapa yang tidak follow back."
       />
       <div className="hero bg-base-200 min-h-screen">
         <div className="hero-content text-center">

@@ -7,7 +7,7 @@ const Privacy = () => {
     <>
       <SeoHead
         title="Privacy | InstaCik"
-        description="Cari tau bagaimana kami mengelolah data anda. Kami tidak menyimpan data yang anda unggah pada halaman upload semua hanya bersifat static tidak disimpan pada database atau storage manapun"
+        description="Pelajari bagaimana InstaCik menjaga privasi dan keamanan datamu. Kami tidak menyimpan atau membagikan data yang kamu unggah — semua proses berlangsung secara lokal tanpa tersimpan di server mana pun."
       />
       <div className="hero bg-base-200 min-h-screen">
         <div className="hero-content text-center">
