@@ -1,6 +1,5 @@
 import { SeoHead } from "@/components/SeoHead";
 import { useChangeLanguage } from "@/features/language/components/ChangeLanguageContext";
-import { TypeAnimation } from "react-type-animation";
 
 const Privacy = () => {
   const { isEnglish } = useChangeLanguage();
