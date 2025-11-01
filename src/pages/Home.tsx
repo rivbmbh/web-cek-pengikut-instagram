@@ -20,7 +20,11 @@ const Home = () => {
               </span>
             </h1>
             <div className="py-10">
-              <img src="cool.webp" alt="capybara" className="w-44 mx-auto" />
+              <img
+                src="/capybara/cool.webp"
+                alt="capybara"
+                className="w-64 mx-auto"
+              />
             </div>
             <div className="space-y-4">
               <p className="text-3xl font-bold text-center">

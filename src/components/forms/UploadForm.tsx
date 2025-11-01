@@ -212,7 +212,7 @@ function UploadForm({ isEnglish }: UploadFormProps) {
           toast.error(
             "The uploaded files don't contain valid Instagram data.",
             {
-              icon: () => <img src="error.webp" />,
+              icon: () => <img src="/capybara/error.webp" />,
               position: "top-center",
               theme: "colored",
             }
@@ -226,7 +226,7 @@ function UploadForm({ isEnglish }: UploadFormProps) {
         toast.error(
           "File yang kamu upload tidak sesuai dengan struktur data dari Instagram",
           {
-            icon: () => <img src="error.webp" />,
+            icon: () => <img src="/capybara/error.webp" />,
             position: "top-center",
             theme: "colored",
           }
@@ -253,7 +253,7 @@ function UploadForm({ isEnglish }: UploadFormProps) {
           : "An unknown error occurred while reading JSON files.";
 
       toast.error(`Failed to read or parse JSON files. ${errorMessage}`, {
-        icon: () => <img src="error.webp" className="w-10" />,
+        icon: () => <img src="/capybara/error.webp" className="w-10" />,
         position: "top-center",
         theme: "colored",
       });

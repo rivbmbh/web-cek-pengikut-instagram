@@ -53,7 +53,11 @@ const TableResult = ({ table, message, isEnglish }: TableResultProps) => {
       ) : (
         <div className="text-center">
           <div className="flex justify-center w-full">
-            <img src="/yeaay.webp" alt="icon-capybara" className="mt-5" />
+            <img
+              src="/capybara/yeaay.webp"
+              alt="icon-capybara"
+              className="mt-5"
+            />
           </div>
           <p className="text-center font-semibold text-lg">
             {isEnglish ? message[0] : message[1]}

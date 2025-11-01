@@ -36,7 +36,11 @@ const Result: React.FC = () => {
           <div className="hero-content text-center">
             <div className="max-w-md">
               <div className="text-center">
-                <img src="/blee.webp" alt="capybara" className="mx-auto" />
+                <img
+                  src="/capybara/blee.webp"
+                  alt="capybara"
+                  className="mx-auto"
+                />
                 <p className="text-base font-semibold my-4">
                   {isEnglish
                     ? "No data found. Please upload your files first."
