@@ -13,8 +13,8 @@ const Privacy = () => {
         <div className="hero-content text-center">
           <div className="max-w-2xl">
             {!isEnglish ? (
-              <div className="text-justify w-full text-base [&_p]:text-justify">
-                <h2 className="font-bold text-2xl">
+              <div className="text-start w-full text-base [&_p]:text-justify">
+                <h2 className="font-bold text-3xl mb-5">
                   Selamat datang di{" "}
                   <span className="bg-linear-to-r from-accent via-teal-200 to-emerald-300 bg-clip-text font-extrabold text-transparent ...">
                     Insta
@@ -30,7 +30,7 @@ const Privacy = () => {
                   dilakukan langsung di browser kamu (client-side) tanpa
                   mengirimkan data pribadi ke server mana pun.
                 </p>
-                <ul className="space-y-3 mt-3">
+                <ul className="space-y-5 mt-5">
                   <li className="space-y-2">
                     <h3 className="font-semibold ">
                       🔒 Data yang kami proses Username
@@ -80,7 +80,7 @@ const Privacy = () => {
                   your browser (client-side) without sending any personal data
                   to our servers.
                 </p>
-                <ul className="space-y-3 mt-3">
+                <ul className="space-y-5 mt-5">
                   <li className="space-y-2">
                     <h3 className="font-semibold ">🔒 Data We Process</h3>
                     <p className="">

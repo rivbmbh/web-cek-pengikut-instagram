@@ -11,9 +11,9 @@ const Tutorial = () => {
         title="Tutorial | InstaCik"
         description="Panduan lengkap mengetahui siapa yang unfollow kamu di Instagram menggunakan file JSON hasil ekspor data."
       />
-      <div className="w-full min-h-screen px-4">
+      <div className="w-full min-h-screen px-4 bg-base-200">
         <div className="container mx-auto">
-          <div className="w-full flex flex-col justify-center mt-10 pt-10">
+          <div className="w-full flex flex-col justify-center pt-18">
             <div className="text-center space-y-4">
               {!isEnglish ? (
                 <>
