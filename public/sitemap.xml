@@ -3,19 +3,19 @@
   xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
 >
   <url>
-    <loc>https://instacik.vercel.app/</loc>
+    <loc>https://www.instacik.online/</loc>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://instacik.vercel.app/upload</loc>
+    <loc>https://www.instacik.online/upload</loc>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://instacik.vercel.app/tutorial</loc>
+    <loc>https://www.instacik.online/tutorial</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://instacik.vercel.app/result</loc>
+    <loc>https://www.instacik.online/result</loc>
     <priority>0.5</priority>
   </url>
 </urlset>

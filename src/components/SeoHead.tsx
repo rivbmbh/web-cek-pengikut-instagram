@@ -10,8 +10,8 @@ interface SeoProps {
 export function SeoHead({
   title,
   description,
-  url = "https://instacik.vercel.app",
-  image = "https://instacik.vercel.app/og_image.png",
+  url = "https://www.instacik.online",
+  image = "https://www.instacik.online/og_image.png",
 }: SeoProps) {
   return (
     <Helmet>
