@@ -46,11 +46,14 @@ const Home = () => {
               </p>
             </div>
             <div className="text-center mt-14">
-              <button className="btn btn-dash btn-accent text-lg uppercase">
-                <a href="/upload" className="py-5">
+              <a
+                href="/upload"
+                className="btn btn-dash btn-accent text-lg uppercase"
+              >
+                <p className="py-5">
                   {isEnglish ? "Get started" : "Mulai sekarang"}
-                </a>
-              </button>
+                </p>
+              </a>
             </div>
           </div>
         </div>
