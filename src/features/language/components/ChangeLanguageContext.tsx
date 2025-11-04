@@ -2,7 +2,7 @@ import type {
   ChangeLanguageContextType,
   ChangeLanguageProviderProps,
 } from "@/types";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const ChangeLanguageContext = createContext<
   ChangeLanguageContextType | undefined
@@ -21,7 +21,14 @@ export const useChangeLanguage = (): ChangeLanguageContextType => {
 export const ChangeLanguageProvider = ({
   children,
 }: ChangeLanguageProviderProps) => {
-  const [isEnglish, setIsEnglish] = useState<boolean | false>(false);
+  const [isEnglish, setIsEnglish] = useState<boolean | false>(() => {
+    const storedLang = localStorage.getItem("isEnglish");
+    return storedLang ? JSON.parse(storedLang) : false; //default false/= ID (Indonesia)
+  });
+
+  useEffect(() => {
+    localStorage.setItem("isEnglish", JSON.stringify(isEnglish));
+  }, [isEnglish]);
 
   const changeToEnglish = () => {
     setIsEnglish(true);

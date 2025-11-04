@@ -29,6 +29,7 @@ const Home = () => {
             <div className="space-y-4">
               <p className="text-3xl font-bold text-center">
                 <TypeAnimation
+                  key={isEnglish ? "en" : "id"}
                   sequence={
                     isEnglish
                       ? [
@@ -41,6 +42,7 @@ const Home = () => {
                         ]
                   }
                   speed={40}
+                  wrapper="p"
                   repeat={Infinity}
                 />
               </p>
